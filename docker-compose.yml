@@ -15,8 +15,13 @@ services:
     deploy:
         labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.belief-server.rule=Host(`belief.aristosci.ninja`)"
+        #Setup Endpoints for http and https
         - "traefik.http.routers.belief-server.entrypoints=https"
+        - "traefik.http.routers.belief-server.rule=Host(`belief.aristosci.ninja`)"
+        - "traefik.http.routers.belief-server-http.entrypoints=http"
+        - "traefik.http.routers.belief-server-http.rule=Host(`belief.aristosci.ninja`)"
+        - "traefik.http.routers.belief-server-http.middlewares=belief-server-https@docker"
+        - "traefik.http.middlewares.belief-server-https.redirectscheme.scheme=https"
         - "traefik.constraint-label=traefik-public"
         - traefik.http.routers.belief-server.service=belief-backend
         - "traefik.http.services.belief-backend.loadbalancer.server.port=8080"
