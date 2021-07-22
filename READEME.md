@@ -1,1 +1,2 @@
-Hello Readme
+$> npm install
+$> npm start

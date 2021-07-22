@@ -10,6 +10,8 @@ services:
       - traefik-public
       - default
     image: 127.0.0.1:5000/belief
+    env_file:
+      - .env
     build: .
     container_name: belief.aristosci.ninja-server
     deploy:
